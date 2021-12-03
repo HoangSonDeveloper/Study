@@ -1,7 +1,7 @@
 import React from "react";
 
-import StopwatchScreen from "./app/screens/StopwatchScreen";
+import ForecastScreen from "./app/screens/ForecastScreen";
 
 export default function App() {
-  return <StopwatchScreen />;
+  return <ForecastScreen />;
 }

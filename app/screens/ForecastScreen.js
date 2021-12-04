@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Alert, ImageBackground, StyleSheet } from "react-native";
-import * as Location from "expo-location";
 
 import DayBoard from "../components/forecast/DayBoard";
 import HourBoard from "../components/forecast/HourBoard";
@@ -11,43 +10,31 @@ import { create } from "apisauce";
 const apiClient = create({
   baseURL: "https://api.openweathermap.org/data/2.5",
 });
-const apiKey = "c4902d16cb8ae6ba67a1fc32297fa6d4";
+const apiKey = "b706e0ce3f079001ab408ec79433842c";
 
 function ForecastScreen(props) {
   const [hour, setHour] = useState([]);
   const [day, setDay] = useState();
   const [current, setCurrent] = useState();
-  const [location, setLocation] = useState();
 
   useEffect(() => {
-    getLocation();
-    getOnecallApi();
     getCurrentApi();
+    getOnecallApi();
   }, []);
 
   const getCurrentApi = async () => {
     const { data } = await apiClient.get(
-      `/weather?lat=${location.latitude}&lon=${location.longitude}&units=metric&appid=${apiKey}`
+      `/weather?lat=${12.24348}&lon=${109.196091}&units=metric&appid=${apiKey}`
     );
     setCurrent(data);
   };
 
   const getOnecallApi = async () => {
     const { data } = await apiClient.get(
-      `/onecall?lat=${location.latitude}&lon=${location.longitude}&units=metric&appid=${apiKey}`
+      `/onecall?lat=${12.24348}&lon=${109.196091}&units=metric&appid=${apiKey}`
     );
     setHour(data.hourly);
     setDay(data.daily);
-  };
-
-  const getLocation = async () => {
-    const { granted } = await Location.requestForegroundPermissionsAsync();
-    if (!granted) return Alert.alert("Cannot get location");
-
-    const {
-      coords: { latitude, longitude },
-    } = await Location.getCurrentPositionAsync();
-    setLocation({ latitude, longitude });
   };
 
   return (

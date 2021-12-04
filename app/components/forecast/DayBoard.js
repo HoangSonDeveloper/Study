@@ -8,7 +8,7 @@ import DayItem from "./DayItem";
 function DayBoard({ day }) {
   return (
     <View style={styles.view}>
-      <AppText style={styles.text}> Du bao 10 ngay</AppText>
+      <AppText style={styles.text}> The next 10 days</AppText>
       <FlatList
         data={day}
         keyExtractor={(day, index) => index}
